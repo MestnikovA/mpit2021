@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("МОЙ ТИП", String.valueOf(task.getResult().getValue()));
 
                                         if(task.getResult().getValue().toString().equals("0")){
-                                            startActivity(new Intent(MainActivity.this, WorkerActivity.class));
+                                            startActivity(new Intent(MainActivity.this, WorkerActivityNav.class));
                                         }
                                         else{
                                             startActivity(new Intent(MainActivity.this, OrdersActitvity.class));

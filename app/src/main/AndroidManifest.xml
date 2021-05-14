@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".WorkerActivity"></activity>
+        <activity
+            android:name=".WorkerActivityNav"
+            android:label="@string/title_activity_worker_nav"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".WorkerActivity" />
         <activity android:name=".OrdersActitvity" />
         <activity android:name=".Entered" />
         <activity android:name=".RegisterWindow" />
