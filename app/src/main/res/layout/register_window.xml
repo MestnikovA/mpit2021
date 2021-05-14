@@ -73,5 +73,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/registerCheckBoxStudent"
+        android:layout_width="268dp"
+        android:layout_height="70dp"
+        android:text="Готовы ли вы к выполнению заказов? (Для исполнителей. Если вы не являетесь исполнителем, то оставьте поле нетронутым)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerCheckBox" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

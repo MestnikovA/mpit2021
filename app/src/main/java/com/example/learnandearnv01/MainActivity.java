@@ -124,11 +124,20 @@ public class MainActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         Log.d("МОЙ ТИП", String.valueOf(task.getResult().getValue()));
 
+
+                                        // 0 - УЧЕНИК
+                                        // 1 - Заказчик
+                                        // 2 - НЕУЧЕНИК
+                                        // 3 - ФУНКЦИЯ СТАЖИРОВКИ
+
                                         if(task.getResult().getValue().toString().equals("0")){
-                                            startActivity(new Intent(MainActivity.this, WorkerActivityNav.class));
+                                            startActivity(new Intent(MainActivity.this, StudentActivity.class));
                                         }
-                                        else{
+                                        if(task.getResult().getValue().toString().equals("1")){
                                             startActivity(new Intent(MainActivity.this, OrdersActitvity.class));
+                                        }
+                                        if(task.getResult().getValue().toString().equals("2")){
+                                            startActivity(new Intent(MainActivity.this, WorkerActivity.class));
                                         }
                                     }
                                 });
@@ -166,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText surname = register_window.findViewById(R.id.registerSurname);
         final MaterialEditText pass = register_window.findViewById(R.id.registerPassword);
         final MaterialCheckBox order = register_window.findViewById(R.id.registerCheckBox);
+        final MaterialCheckBox student = register_window.findViewById(R.id.registerCheckBoxStudent);
 
 
         dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
@@ -202,8 +212,18 @@ public class MainActivity extends AppCompatActivity {
                                 user.setSurname(surname.getText().toString());
                                 user.setPass(pass.getText().toString());
                                 user.setMail(mail.getText().toString());
-                                if(order.isChecked()){
+
+                                // 0 - УЧЕНИК
+                                // 1 - Заказчик
+                                // 2 - НЕУЧЕНИК
+                                // 3 - ФУНКЦИЯ СТАЖИРОВКИ
+
+
+                                if(order.isChecked() && !student.isChecked()){
                                     user.setType("1");
+                                }
+                                if(!order.isChecked() && student.isChecked()){
+                                    user.setType("2");
                                 }
                                 else{
                                     user.setType("0");
