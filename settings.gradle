@@ -1,0 +1,2 @@
+rootProject.name = "LearnAndEarnV0.1"
+include ':app'
