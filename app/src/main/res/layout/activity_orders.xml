@@ -6,32 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".OrdersActitvity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/myOrdersBottomNavigationView"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="309dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="403dp"
+        android:text="Привет заказчик"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/order_bottom_menu"/>
-
-    <fragment
-        android:id="@+id/myOrdersFragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="409dp"
-        android:layout_height="672dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/myOrdersBottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/order_nav" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,29 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/registerbg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterWindow">
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/registerPassword"
-        android:layout_width="268dp"
+        android:layout_width="205dp"
         android:layout_height="50dp"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Пароль"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerSurname" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/registerSurname"
-        android:layout_width="268dp"
+        android:layout_width="205dp"
         android:layout_height="50dp"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Фамилия"
@@ -36,51 +39,44 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/registerName"
-        android:layout_width="268dp"
-        android:layout_height="50dp"
+        android:layout_width="205dp"
+        android:layout_height="54dp"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Имя"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerMail" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/registerMail"
-        android:layout_width="268dp"
-        android:layout_height="50dp"
+        android:layout_width="205dp"
+        android:layout_height="46dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Введите почту"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/registerCheckBox"
-        android:layout_width="268dp"
+        android:layout_width="205dp"
         android:layout_height="63dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:text="Являетесь ли вы заказчиком?"
+        android:text="Ищете работу?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/registerCheckBoxStudent"
-        android:layout_width="268dp"
-        android:layout_height="70dp"
-        android:text="Готовы ли вы к выполнению заказов? (Для исполнителей. Если вы не являетесь исполнителем, то оставьте поле нетронутым)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerCheckBox" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

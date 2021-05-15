@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.learnandearnv01.models.User;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference users;
 
+    String profileName;
+    String profileMail;
+
 
 
     androidx.constraintlayout.widget.ConstraintLayout root;
@@ -57,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         users = db.getReference("Users");
+        profileName = new String("");
+        profileMail = new String("");
+
+
 
         root = findViewById(R.id.root_element);
 
@@ -117,7 +125,24 @@ public class MainActivity extends AppCompatActivity {
                                 DatabaseReference dbUsers = FirebaseDatabase.getInstance().getReference("Users");
                                 DatabaseReference userId = dbUsers.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 DatabaseReference userType = userId.child("type");
+                                DatabaseReference userName = userId.child("name");
+                                DatabaseReference userMail = userId.child("mail");
                                 final String[] myType = {""};
+                                final String[] myName = {""};
+                                userName.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileName = String.valueOf(task.getResult().getValue());
+                                    }
+                                });
+                                userMail.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileMail = String.valueOf(task.getResult().getValue());
+                                    }
+                                });
 
                                 userType.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
@@ -125,20 +150,11 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("МОЙ ТИП", String.valueOf(task.getResult().getValue()));
 
 
-                                        // 0 - УЧЕНИК
-                                        // 1 - Заказчик
-                                        // 2 - НЕУЧЕНИК
-                                        // 3 - ФУНКЦИЯ СТАЖИРОВКИ
+                                        Intent intent = new Intent(MainActivity.this, WorkerActivityNav.class);
+                                        intent.putExtra("PROFILE_NAME", profileName);
+                                        intent.putExtra("PROFILE_MAIL", profileMail);
+                                        startActivity(intent);
 
-                                        if(task.getResult().getValue().toString().equals("0")){
-                                            startActivity(new Intent(MainActivity.this, StudentActivity.class));
-                                        }
-                                        if(task.getResult().getValue().toString().equals("1")){
-                                            startActivity(new Intent(MainActivity.this, OrdersActitvity.class));
-                                        }
-                                        if(task.getResult().getValue().toString().equals("2")){
-                                            startActivity(new Intent(MainActivity.this, WorkerActivity.class));
-                                        }
                                     }
                                 });
 
@@ -175,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText surname = register_window.findViewById(R.id.registerSurname);
         final MaterialEditText pass = register_window.findViewById(R.id.registerPassword);
         final MaterialCheckBox order = register_window.findViewById(R.id.registerCheckBox);
-        final MaterialCheckBox student = register_window.findViewById(R.id.registerCheckBoxStudent);
 
 
         dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
@@ -212,18 +227,8 @@ public class MainActivity extends AppCompatActivity {
                                 user.setSurname(surname.getText().toString());
                                 user.setPass(pass.getText().toString());
                                 user.setMail(mail.getText().toString());
-
-                                // 0 - УЧЕНИК
-                                // 1 - Заказчик
-                                // 2 - НЕУЧЕНИК
-                                // 3 - ФУНКЦИЯ СТАЖИРОВКИ
-
-
-                                if(order.isChecked() && !student.isChecked()){
+                                if(order.isChecked()){
                                     user.setType("1");
-                                }
-                                if(!order.isChecked() && student.isChecked()){
-                                    user.setType("2");
                                 }
                                 else{
                                     user.setType("0");
