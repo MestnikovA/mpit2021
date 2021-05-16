@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class Courses {
     private String description, level, coursename, author;
 
-
-    private ArrayList<String> themes;
-
     public Courses() {
         this.description = description;
         this.level = level;

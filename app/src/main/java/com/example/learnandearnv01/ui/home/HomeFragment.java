@@ -33,13 +33,17 @@ public class HomeFragment extends Fragment {
         //View view = inflater.inflate(R.layout.fragment_home, container, false);
         TextView proName = (TextView) root.findViewById(R.id.tvUserName);
         TextView proMail = (TextView) root.findViewById(R.id.tvUserEmail);
+        TextView proType = (TextView) root.findViewById(R.id.tvUserType);
+        TextView proPhone = (TextView) root.findViewById(R.id.tvUserPhone);
+        if(getActivity().getIntent().getStringExtra("PROFILE_TYPE").equals("0")){
+            proType.setText("Нет");
+        }
+        else{
+            proType.setText("Да");
+        }
+        proPhone.setText(getActivity().getIntent().getStringExtra("PROFILE_PHONE"));
         proName.setText(getActivity().getIntent().getStringExtra("PROFILE_NAME"));
         proMail.setText(getActivity().getIntent().getStringExtra("PROFILE_MAIL"));
-
-
-
-
-
 
         return root;
     }

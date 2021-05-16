@@ -1,7 +1,24 @@
 package com.example.learnandearnv01.models;
 
 public class User {
-    private String name, mail, pass, surname, type, orders, requests, courses;
+    private String name;
+    private String mail;
+    private String pass;
+    private String surname;
+    private String type;
+    private String orders;
+    private String requests;
+    private String courses;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    private String phone;
 
     public User() {
         this.orders = orders;
@@ -12,7 +29,9 @@ public class User {
         this.name = name;
         this.pass = pass;
         this.type = type;
+        this.phone = phone;
     }
+
     public String getName(){
         return name;
     }

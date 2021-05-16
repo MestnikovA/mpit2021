@@ -21,7 +21,7 @@ public class WorkerActivityNav extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityWorkerNavBinding binding;
-    TextView profileName;
+
 
 
 
@@ -54,6 +54,11 @@ public class WorkerActivityNav extends AppCompatActivity {
 
         //profileName = findViewById(R.id.tvUserName);
         //profileName.setText(getIntent().getStringExtra("PROFILE_NAME"));
+        View header = navigationView.getHeaderView(0);
+        TextView headerName = (TextView) header.findViewById(R.id.headerUserName);
+        TextView headerMail = (TextView) header.findViewById(R.id.headerUserMail);
+        headerName.setText(getIntent().getStringExtra("PROFILE_NAME"));
+        headerMail.setText(getIntent().getStringExtra("PROFILE_MAIL"));
     }
 
     @Override

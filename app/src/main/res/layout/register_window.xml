@@ -57,7 +57,7 @@
         android:layout_width="205dp"
         android:layout_height="46dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Введите почту"
@@ -74,6 +74,15 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:text="Ищете работу?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/userPhone"
+        android:layout_width="205dp"
+        android:layout_height="50dp"
+        android:hint="Телефон"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPassword" />

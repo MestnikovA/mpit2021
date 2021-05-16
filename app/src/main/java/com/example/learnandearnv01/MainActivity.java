@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     String profileName;
     String profileMail;
+    String profilePhone;
+    String profileType;
+
+    EditText etUserMail;
+    EditText etUserPass;
+
 
 
 
@@ -63,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
         users = db.getReference("Users");
         profileName = new String("");
         profileMail = new String("");
+        profilePhone = new String("");
+        profileType = new String("");
+
+        etUserMail = findViewById(R.id.etUserMail);
+        etUserPass = findViewById(R.id.etUserPass);
 
 
 
@@ -71,7 +83,84 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSignInWindow();
+                if(TextUtils.isEmpty(etUserMail.getText().toString())){
+                    Snackbar.make(root, "Введите вашу почту!", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(etUserPass.getText().toString().length()<5){
+                    Snackbar.make(root, "Введите пароль, длиннее 5 символов.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                auth.signInWithEmailAndPassword(etUserMail.getText().toString(), etUserPass.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                DatabaseReference dbUsers = FirebaseDatabase.getInstance().getReference("Users");
+                                DatabaseReference userId = dbUsers.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                DatabaseReference userType = userId.child("type");
+                                DatabaseReference userName = userId.child("name");
+                                DatabaseReference userMail = userId.child("mail");
+                                DatabaseReference userSurname = userId.child("surname");
+                                DatabaseReference userPhone = userId.child("phone");
+                                final String[] myType = {""};
+                                final String[] myName = {""};
+                                userPhone.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+
+                                        profilePhone = String.valueOf(task.getResult().getValue())+" ";
+                                    }
+                                });
+                                userSurname.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileName =profileName + String.valueOf(task.getResult().getValue())+" ";
+                                    }
+                                });
+                                userName.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileName =profileName + String.valueOf(task.getResult().getValue());
+                                    }
+                                });
+                                userMail.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileMail = String.valueOf(task.getResult().getValue());
+                                    }
+                                });
+
+                                userType.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ ТИП", String.valueOf(task.getResult().getValue()));
+
+                                        profileType = String.valueOf(task.getResult().getValue());
+                                        Intent intent = new Intent(MainActivity.this, WorkerActivityNav.class);
+                                        intent.putExtra("PROFILE_NAME", profileName);
+                                        intent.putExtra("PROFILE_MAIL", profileMail);
+                                        intent.putExtra("PROFILE_PHONE", profilePhone);
+                                        intent.putExtra("PROFILE_TYPE", profileType);
+                                        startActivity(intent);
+
+                                    }
+                                });
+
+                                //startActivity(new Intent(MainActivity.this, Entered.class));
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Snackbar.make(root, "Ошибка" + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+                //showSignInWindow();
             }
         });
 
@@ -127,13 +216,30 @@ public class MainActivity extends AppCompatActivity {
                                 DatabaseReference userType = userId.child("type");
                                 DatabaseReference userName = userId.child("name");
                                 DatabaseReference userMail = userId.child("mail");
+                                DatabaseReference userSurname = userId.child("surname");
+                                DatabaseReference userPhone = userId.child("phone");
                                 final String[] myType = {""};
                                 final String[] myName = {""};
+                                userPhone.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+
+                                        profilePhone = String.valueOf(task.getResult().getValue())+" ";
+                                    }
+                                });
+                                userSurname.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
+                                        profileName =profileName + String.valueOf(task.getResult().getValue())+" ";
+                                    }
+                                });
                                 userName.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         Log.d("МОЙ NAME", String.valueOf(task.getResult().getValue()));
-                                        profileName = String.valueOf(task.getResult().getValue());
+                                        profileName =profileName + String.valueOf(task.getResult().getValue());
                                     }
                                 });
                                 userMail.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -149,10 +255,12 @@ public class MainActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         Log.d("МОЙ ТИП", String.valueOf(task.getResult().getValue()));
 
-
+                                        profileType = String.valueOf(task.getResult().getValue());
                                         Intent intent = new Intent(MainActivity.this, WorkerActivityNav.class);
                                         intent.putExtra("PROFILE_NAME", profileName);
                                         intent.putExtra("PROFILE_MAIL", profileMail);
+                                        intent.putExtra("PROFILE_PHONE", profilePhone);
+                                        intent.putExtra("PROFILE_TYPE", profileType);
                                         startActivity(intent);
 
                                     }
@@ -190,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText name = register_window.findViewById(R.id.registerName);
         final MaterialEditText surname = register_window.findViewById(R.id.registerSurname);
         final MaterialEditText pass = register_window.findViewById(R.id.registerPassword);
+        final MaterialEditText phone = register_window.findViewById(R.id.userPhone);
         final MaterialCheckBox order = register_window.findViewById(R.id.registerCheckBox);
 
 
@@ -227,8 +336,10 @@ public class MainActivity extends AppCompatActivity {
                                 user.setSurname(surname.getText().toString());
                                 user.setPass(pass.getText().toString());
                                 user.setMail(mail.getText().toString());
+                                user.setPhone(phone.getText().toString());
                                 if(order.isChecked()){
                                     user.setType("1");
+                                    //ИЩЕТ РАБОТУ
                                 }
                                 else{
                                     user.setType("0");

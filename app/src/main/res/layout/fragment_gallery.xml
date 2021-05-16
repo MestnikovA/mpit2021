@@ -22,38 +22,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
+            android:background="#1C2020"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/btnAllCourses"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Курсы" />
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/coursebutton"
+                android:text="Курсы"
+                android:textColor="#00FFFC" />
 
             <Button
-                android:id="@+id/button"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/btnMyCourses"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Мои курсы" />
+                android:layout_marginLeft="-40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/coursebutton"
+                android:text="Мои курсы"
+                android:textColor="@color/myButtonColor2" />
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/coursesView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#1C2020"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnJsCourse"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CourseName" />
-        </LinearLayout>
+                android:layout_height="100dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/buttonstyle"
+                android:padding="10dp"
+                android:text="CourseName"
+                android:textAlignment="center"
+                android:textColor="#F6F6F6" />
+        </ScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
