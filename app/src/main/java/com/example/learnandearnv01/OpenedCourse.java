@@ -39,15 +39,6 @@ public class OpenedCourse extends AppCompatActivity {
 
         openedActivity = findViewById(R.id.openedActivity);
 
-        String videoSource = "";
-
-        MediaController mc = new MediaController(this);
-        rickroll = (WebView) findViewById(R.id.rickroll);
-
-        rickroll.getSettings().setJavaScriptEnabled(true);
-        rickroll.getSettings().setPluginState(WebSettings.PluginState.ON);
-        rickroll.loadUrl("http://www.youtube.com/embed/" + "dQw4w9WgXcQ" + "?autoplay=1&vq=small");
-        rickroll.setWebChromeClient(new WebChromeClient());
 
         btnAddCourse.setOnClickListener(new View.OnClickListener() {
             @Override
